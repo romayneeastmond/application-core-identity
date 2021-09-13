@@ -1,0 +1,13 @@
+C:\Users\romay\source\repos\ApplicationCoreIdentity\ApplicationCoreIdentity.Services\bin\Debug\netcoreapp3.1\ApplicationCoreIdentity.Services.deps.json
+C:\Users\romay\source\repos\ApplicationCoreIdentity\ApplicationCoreIdentity.Services\bin\Debug\netcoreapp3.1\ApplicationCoreIdentity.Services.dll
+C:\Users\romay\source\repos\ApplicationCoreIdentity\ApplicationCoreIdentity.Services\bin\Debug\netcoreapp3.1\ApplicationCoreIdentity.Services.pdb
+C:\Users\romay\source\repos\ApplicationCoreIdentity\ApplicationCoreIdentity.Services\bin\Debug\netcoreapp3.1\ApplicationCoreIdentity.Models.dll
+C:\Users\romay\source\repos\ApplicationCoreIdentity\ApplicationCoreIdentity.Services\bin\Debug\netcoreapp3.1\ApplicationCoreIdentity.Models.pdb
+C:\Users\romay\source\repos\ApplicationCoreIdentity\ApplicationCoreIdentity.Services\obj\Debug\netcoreapp3.1\ApplicationCoreIdentity.Services.csproj.AssemblyReference.cache
+C:\Users\romay\source\repos\ApplicationCoreIdentity\ApplicationCoreIdentity.Services\obj\Debug\netcoreapp3.1\ApplicationCoreIdentity.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\romay\source\repos\ApplicationCoreIdentity\ApplicationCoreIdentity.Services\obj\Debug\netcoreapp3.1\ApplicationCoreIdentity.Services.AssemblyInfoInputs.cache
+C:\Users\romay\source\repos\ApplicationCoreIdentity\ApplicationCoreIdentity.Services\obj\Debug\netcoreapp3.1\ApplicationCoreIdentity.Services.AssemblyInfo.cs
+C:\Users\romay\source\repos\ApplicationCoreIdentity\ApplicationCoreIdentity.Services\obj\Debug\netcoreapp3.1\ApplicationCoreIdentity.Services.csproj.CoreCompileInputs.cache
+C:\Users\romay\source\repos\ApplicationCoreIdentity\ApplicationCoreIdentity.Services\obj\Debug\netcoreapp3.1\ApplicationCoreIdentity.Services.csproj.CopyComplete
+C:\Users\romay\source\repos\ApplicationCoreIdentity\ApplicationCoreIdentity.Services\obj\Debug\netcoreapp3.1\ApplicationCoreIdentity.Services.dll
+C:\Users\romay\source\repos\ApplicationCoreIdentity\ApplicationCoreIdentity.Services\obj\Debug\netcoreapp3.1\ApplicationCoreIdentity.Services.pdb
