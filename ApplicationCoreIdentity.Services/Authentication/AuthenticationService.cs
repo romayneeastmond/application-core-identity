@@ -49,7 +49,7 @@ namespace ApplicationCoreIdentity.Services.Authentication
 
                 return new UserViewModel
                 {
-                    Id = databaseUser.Id,                    
+                    Id = databaseUser.Id,
                     FirstName = databaseUser.FirstName,
                     LastName = databaseUser.LastName,
                     EmailAddress = databaseUser.EmailAddress,
@@ -62,7 +62,7 @@ namespace ApplicationCoreIdentity.Services.Authentication
             throw new Exception();
         }
 
-        public async void Logout()
+        public async Task Logout()
         {
             await _signInManager.SignOutAsync();
         }
@@ -114,58 +114,64 @@ namespace ApplicationCoreIdentity.Services.Authentication
             throw new Exception(string.Join(Environment.NewLine, result.Errors.Select(x => x.Description)));
         }
 
-        public async void Update(UserViewModel user)
+        public async Task Update(UserViewModel user)
         {
             var result = await _signInManager.PasswordSignInAsync(user.EmailAddress, user.Password, false, false);
 
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
-                var identityUser = await _userManager.FindByEmailAsync(user.EmailAddress);
+                throw new Exception();
+            }
 
-                if (identityUser != null)
+            var identityUser = await _userManager.FindByEmailAsync(user.EmailAddress);
+
+            if (identityUser != null)
+            {
+                var databaseUser = await _db.Users.Where(x => x.EmailAddress == user.EmailAddress).FirstOrDefaultAsync();
+
+                if (databaseUser != null)
                 {
-                    var databaseUser = await _db.Users.Where(x => x.EmailAddress == user.EmailAddress).FirstOrDefaultAsync();
+                    databaseUser.FirstName = user.FirstName;
+                    databaseUser.LastName = user.LastName;
+                    databaseUser.Updated = DateTime.UtcNow;
 
-                    if (databaseUser != null)
-                    {
-                        databaseUser.FirstName = user.FirstName;
-                        databaseUser.LastName = user.LastName;
-                        databaseUser.Updated = DateTime.UtcNow;
-
-                        await _db.SaveChangesAsync();
-                    }
+                    await _db.SaveChangesAsync();
                 }
             }
         }
 
-        public async void UpdatePassword(UserViewModel user, string oldPassword)
+        public async Task UpdatePassword(UserViewModel user, string oldPassword)
         {
             var result = await _signInManager.PasswordSignInAsync(user.EmailAddress, oldPassword, false, false);
 
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
-                var identityUser = await _userManager.FindByEmailAsync(user.EmailAddress);
+                throw new Exception();
+            }
 
-                if (identityUser != null)
-                {
-                    var passwordValidator = new PasswordValidator<IdentityUser>();
+            var identityUser = await _userManager.FindByEmailAsync(user.EmailAddress);
 
-                    var resultPasswordValidator = await passwordValidator.ValidateAsync(_userManager, identityUser, user.Password);
+            if (identityUser == null)
+            {
+                throw new Exception();
+            }
 
-                    if (!resultPasswordValidator.Succeeded)
-                    {
-                        throw new Exception(string.Join(Environment.NewLine, resultPasswordValidator.Errors.Select(x => x.Description)));
-                    }
+            var passwordValidator = new PasswordValidator<IdentityUser>();
 
-                    identityUser.PasswordHash = _userManager.PasswordHasher.HashPassword(identityUser, user.Password);
+            var resultPasswordValidator = await passwordValidator.ValidateAsync(_userManager, identityUser, user.Password);
 
-                    var resultUpdate = await _userManager.UpdateAsync(identityUser);
+            if (!resultPasswordValidator.Succeeded)
+            {
+                throw new Exception(string.Join(Environment.NewLine, resultPasswordValidator.Errors.Select(x => x.Description)));
+            }
 
-                    if (!resultUpdate.Succeeded)
-                    {
-                        throw new Exception(string.Join(Environment.NewLine, resultUpdate.Errors.Select(x => x.Description)));
-                    }
-                }
+            identityUser.PasswordHash = _userManager.PasswordHasher.HashPassword(identityUser, user.Password);
+
+            var resultUpdate = await _userManager.UpdateAsync(identityUser);
+
+            if (!resultUpdate.Succeeded)
+            {
+                throw new Exception(string.Join(Environment.NewLine, resultUpdate.Errors.Select(x => x.Description)));
             }
         }
 

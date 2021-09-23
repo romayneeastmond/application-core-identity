@@ -35,8 +35,8 @@ namespace ApplicationCoreIdentity.Api.Controllers
         [HttpPost]
         [Route(template: "logout")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public void Logout()
-            => new AuthenticationService(_userManager, _signInManager, _authenticationConfiguration, _db).Logout();
+        public async Task Logout()
+            => await new AuthenticationService(_userManager, _signInManager, _authenticationConfiguration, _db).Logout();
 
         [HttpPost]
         [Route(template: "register")]
@@ -47,13 +47,13 @@ namespace ApplicationCoreIdentity.Api.Controllers
         [HttpPost]
         [Route(template: "update")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public void Update([FromBody] UserViewModel user)
-            => new AuthenticationService(_userManager, _signInManager, _authenticationConfiguration, _db).Update(user);
+        public async Task Update([FromBody] UserViewModel user)
+            => await new AuthenticationService(_userManager, _signInManager, _authenticationConfiguration, _db).Update(user);
 
         [HttpPost]
         [Route(template: "update/password")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public void UpdatePassword([FromBody] UserViewModel user, string oldPassword)
-            => new AuthenticationService(_userManager, _signInManager, _authenticationConfiguration, _db).UpdatePassword(user, oldPassword);
+        public async Task UpdatePassword([FromBody] UserViewModel user, string oldPassword)
+            => await new AuthenticationService(_userManager, _signInManager, _authenticationConfiguration, _db).UpdatePassword(user, oldPassword);
     }
 }
