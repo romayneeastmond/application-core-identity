@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCoreIdentity.Services.Authentication
 {
-    public class AuthenticationService
+    public class AuthenticationService : IAuthenticationService
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -62,7 +62,7 @@ namespace ApplicationCoreIdentity.Services.Authentication
             throw new Exception();
         }
 
-        public async Task Logout()
+        public async void Logout()
         {
             await _signInManager.SignOutAsync();
         }

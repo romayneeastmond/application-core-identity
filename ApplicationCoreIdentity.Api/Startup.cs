@@ -25,7 +25,7 @@ namespace ApplicationCoreIdentity.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = Configuration.GetConnectionString("Applicationtring");
+            var connection = Configuration.GetConnectionString("ApplicationString");
             var connectionAuthentication = Configuration.GetConnectionString("AuthenticationString");
 
             var authenticationIssuer = Configuration["Tokens:Issuer"];
@@ -61,7 +61,7 @@ namespace ApplicationCoreIdentity.Api
             );
 
             services.AddAuthentication().AddJwtBearer(
-                options => 
+                options =>
                 {
                     options.RequireHttpsMetadata = false;
                     options.SaveToken = true;
@@ -84,7 +84,7 @@ namespace ApplicationCoreIdentity.Api
                     {
                         cors.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
                     });
-                }    
+                }
             );
 
             services.AddSingleton<IAuthenticationConfiguration>(x =>
@@ -95,6 +95,9 @@ namespace ApplicationCoreIdentity.Api
                     Key = authenticationKey
                 }
             );
+
+            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

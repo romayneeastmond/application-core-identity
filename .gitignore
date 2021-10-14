@@ -50,3 +50,6 @@ Temporary Items
 
 # Visual Studio
 .vs
+bin
+obj
+Debug
